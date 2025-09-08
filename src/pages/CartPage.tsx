@@ -1,60 +1,39 @@
 
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useProducts } from '../hooks/useProducts';
+import { useCart, removeFromCart, updateQuantity } from '../contexts/CartContext';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 
 const CartPage = () => {
-  const { products } = useProducts();
-  
-  // This is mock data - eventually this would be connected to Shopify
-  const [cartItems, setCartItems] = useState([
-    { productId: '2', quantity: 1 },
-    { productId: '4', quantity: 2 }
-  ]);
+  const { state, dispatch } = useCart();
+  const cartProducts = state.items;
 
-  const cartProducts = products
-    .filter(product => cartItems.some(item => item.productId === String(product.id)))
-    .map(product => {
-      const cartItem = cartItems.find(item => item.productId === String(product.id));
-      return {
-        ...product,
-        quantity: cartItem?.quantity || 0
-      };
-    });
-
-  const updateQuantity = (productId: string, newQuantity: number) => {
-    if (newQuantity < 1) return;
-    
-    setCartItems(cartItems.map(item => 
-      item.productId === productId 
-        ? { ...item, quantity: newQuantity } 
-        : item
-    ));
+  const handleUpdateQuantity = (productId: number, newQuantity: number) => {
+    if (newQuantity < 1) {
+      dispatch(removeFromCart(productId));
+    } else {
+      dispatch(updateQuantity(productId, newQuantity));
+    }
   };
 
-  const removeFromCart = (productId: string) => {
-    setCartItems(cartItems.filter(item => item.productId !== productId));
+  const handleRemoveFromCart = (productId: number) => {
+    dispatch(removeFromCart(productId));
   };
 
   const clearCart = () => {
-    setCartItems([]);
+    dispatch({ type: 'CLEAR_CART' });
   };
 
-  // Calculate subtotal
-  const subtotal = cartProducts.reduce((total, product) => {
-    return total + (product.quantity * (product.price || 1249));
+  // Calculate totals
+  const subtotal = cartProducts.reduce((total, item) => {
+    return total + (item.quantity * (item.product.price || 1249));
   }, 0);
   
-  // Calculate estimated tax (for example, 18% GST)
   const estimatedTax = subtotal * 0.18;
-  
-  // Calculate total
   const total = subtotal + estimatedTax;
 
   return (
@@ -64,52 +43,52 @@ const CartPage = () => {
       <div className="container-custom pt-28 pb-20">
         <h1 className="font-playfair text-3xl md:text-4xl font-bold mb-4">Shopping Cart</h1>
         
-        {cartItems.length > 0 ? (
+        {cartProducts.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                {cartProducts.map((product) => (
-                  <div key={product.id} className="flex flex-col sm:flex-row items-start sm:items-center p-4 border-b border-gray-200 last:border-b-0">
+                {cartProducts.map((item) => (
+                  <div key={item.product.id} className="flex flex-col sm:flex-row items-start sm:items-center p-4 border-b border-gray-200 last:border-b-0">
                     <div className="sm:w-20 sm:h-20 mb-4 sm:mb-0 sm:mr-4">
                       <img 
-                        src={product.image} 
-                        alt={product.title} 
+                        src={item.product.image} 
+                        alt={item.product.title} 
                         className="w-full h-full object-cover rounded-md"
                       />
                     </div>
                     
                     <div className="flex-grow">
-                      <Link to={`/product/${product.handle}`} className="font-medium hover:text-primary">
-                        {product.title}
+                      <Link to={`/product/${item.product.handle}`} className="font-medium hover:text-primary">
+                        {item.product.title}
                       </Link>
                       <div className="text-sm text-gray-500 mt-1">
-                        ₹{(product.price || 1249).toLocaleString('en-IN')} each
+                        ₹{(item.product.price || 1249).toLocaleString('en-IN')} each
                       </div>
                     </div>
                     
                     <div className="flex items-center mt-4 sm:mt-0">
                       <button 
-                        onClick={() => updateQuantity(String(product.id), product.quantity - 1)}
+                        onClick={() => handleUpdateQuantity(item.product.id, item.quantity - 1)}
                         className="p-1 border border-gray-300 rounded-l"
                       >
                         <Minus size={16} />
                       </button>
                       <div className="px-3 py-1 border-y border-gray-300">
-                        {product.quantity}
+                        {item.quantity}
                       </div>
                       <button 
-                        onClick={() => updateQuantity(String(product.id), product.quantity + 1)}
+                        onClick={() => handleUpdateQuantity(item.product.id, item.quantity + 1)}
                         className="p-1 border border-gray-300 rounded-r"
                       >
                         <Plus size={16} />
                       </button>
                       
                       <div className="ml-4 font-medium">
-                        ₹{((product.price || 1249) * product.quantity).toLocaleString('en-IN')}
+                        ₹{((item.product.price || 1249) * item.quantity).toLocaleString('en-IN')}
                       </div>
                       
                       <button 
-                        onClick={() => removeFromCart(String(product.id))}
+                        onClick={() => handleRemoveFromCart(item.product.id)}
                         className="ml-4 p-1 text-gray-400 hover:text-red-500"
                       >
                         <Trash2 size={18} />

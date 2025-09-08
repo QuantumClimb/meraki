@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { type Product } from '../hooks/useProducts';
+import { useCart } from '../contexts/CartContext';
 import { Button } from "@/components/ui/button";
 
 interface ProductCardProps {
@@ -9,11 +10,17 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const handleAddToCart = () => {
-    console.log('Added to cart:', product.title);
+  const { dispatch } = useCart();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch({ type: 'ADD_TO_CART', payload: { product, quantity: 1 } });
   };
 
-  const handleAddToWishlist = () => {
+  const handleAddToWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log('Added to wishlist:', product.title);
   };
 

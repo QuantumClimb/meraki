@@ -3,62 +3,95 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useProducts } from '../hooks/useProducts';
+import { useCart, completePurchase } from '../contexts/CartContext';
 import { Lock } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const CheckoutPage = () => {
-  const { products } = useProducts();
+  const { state, dispatch } = useCart();
+  const [isProcessing, setIsProcessing] = useState(false);
   
-  // This is mock data - eventually this would be connected to Shopify
-  const [cartItems] = useState([
-    { productId: '2', quantity: 1 },
-    { productId: '4', quantity: 2 }
-  ]);
-
-  const cartProducts = products
-    .filter(product => cartItems.some(item => item.productId === String(product.id)))
-    .map(product => {
-      const cartItem = cartItems.find(item => item.productId === String(product.id));
-      return {
-        ...product,
-        quantity: cartItem?.quantity || 0
-      };
-    });
-    
-  // Calculate subtotal
-  const subtotal = cartProducts.reduce((total, product) => {
-    return total + (product.quantity * (product.price || 1249));
+  const cartProducts = state.items;
+  
+  // Calculate totals
+  const subtotal = cartProducts.reduce((total, item) => {
+    return total + (item.quantity * (item.product.price || 1249));
   }, 0);
   
-  // Calculate shipping (free for orders over ₹4,000)
   const shipping = subtotal > 4000 ? 0 : 499;
-  
-  // Calculate estimated tax (for example, 18% GST)
   const estimatedTax = subtotal * 0.18;
-  
-  // Calculate total
   const total = subtotal + shipping + estimatedTax;
-  
-  const handlePlaceOrder = () => {
-    // Create simple WhatsApp message
-    const phoneNumber = '+919789909362';
+
+  const handlePlaceOrder = async () => {
+    if (cartProducts.length === 0) return;
     
-    // Format order items
-    const orderItems = cartProducts.map(product => 
-      `${product.title} (Qty: ${product.quantity})`
-    ).join(', ');
+    setIsProcessing(true);
     
-    // Create simple order message
-    const orderMessage = `Hi, I am interested in ${orderItems} with the cost ₹${total.toLocaleString('en-IN')}.`;
-    
-    // Encode message for WhatsApp URL
-    const encodedMessage = encodeURIComponent(orderMessage);
-    const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodedMessage}`;
-    
-    // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
+    try {
+      // Create purchase record
+      const purchase = {
+        id: `purchase-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        items: cartProducts,
+        total,
+        timestamp: Date.now(),
+        whatsappSent: true,
+      };
+
+      // Track purchase on server (optional)
+      try {
+        await fetch('/api/track-purchase', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(purchase),
+        });
+      } catch (error) {
+        console.warn('Failed to track purchase on server:', error);
+        // Continue with local tracking even if server fails
+      }
+
+      // Complete purchase locally
+      dispatch(completePurchase(cartProducts, total));
+
+      // Create WhatsApp message
+      const phoneNumber = '+919789909362';
+      const orderItems = cartProducts.map(item => 
+        `${item.product.title} (Qty: ${item.quantity})`
+      ).join(', ');
+      
+      const orderMessage = `Hi, I am interested in ${orderItems} with the cost ₹${total.toLocaleString('en-IN')}.`;
+      
+      const encodedMessage = encodeURIComponent(orderMessage);
+      const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodedMessage}`;
+      
+      // Open WhatsApp
+      window.open(whatsappUrl, '_blank');
+      
+    } catch (error) {
+      console.error('Error processing order:', error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
+
+  if (cartProducts.length === 0) {
+    return (
+      <div className="min-h-screen">
+        <Navbar />
+        <div className="container-custom pt-28 pb-20">
+          <div className="text-center py-12">
+            <h1 className="font-playfair text-3xl font-bold mb-4">Your cart is empty</h1>
+            <p className="text-gray-600 mb-8">Add some items to your cart to proceed with checkout.</p>
+            <Link to="/products" className="btn-primary">
+              Continue Shopping
+            </Link>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -77,21 +110,21 @@ const CheckoutPage = () => {
               </p>
               
               <div className="space-y-4 mb-6">
-                {cartProducts.map((product) => (
-                  <div key={product.id} className="flex items-center">
+                {cartProducts.map((item) => (
+                  <div key={item.product.id} className="flex items-center">
                     <div className="relative w-16 h-16 mr-4">
                       <img 
-                        src={product.image} 
-                        alt={product.title} 
+                        src={item.product.image} 
+                        alt={item.product.title} 
                         className="w-full h-full object-cover rounded-md"
                       />
                       <div className="absolute -top-2 -right-2 bg-gray-200 text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                        {product.quantity}
+                        {item.quantity}
                       </div>
                     </div>
                     <div className="flex-grow">
-                      <p className="text-sm font-medium">{product.title}</p>
-                      <p className="text-sm text-gray-500">₹{(product.price * product.quantity).toLocaleString('en-IN')}</p>
+                      <p className="text-sm font-medium">{item.product.title}</p>
+                      <p className="text-sm text-gray-500">₹{(item.product.price * item.quantity).toLocaleString('en-IN')}</p>
                     </div>
                   </div>
                 ))}
@@ -107,11 +140,12 @@ const CheckoutPage = () => {
               <div className="mt-6">
                 <Button 
                   onClick={handlePlaceOrder}
+                  disabled={isProcessing}
                   className="w-full flex items-center justify-center"
                   size="lg"
                 >
                   <Lock size={16} className="mr-2" />
-                  Send Order via WhatsApp
+                  {isProcessing ? 'Processing...' : 'Send Order via WhatsApp'}
                 </Button>
                 <p className="text-sm text-gray-500 text-center mt-2">
                   Order will be sent to supplier for payment and shipping details
