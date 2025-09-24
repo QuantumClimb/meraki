@@ -1,5 +1,7 @@
 
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Shield } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -110,16 +112,28 @@ const Footer = () => {
           <p className="text-secondary-foreground/70 text-sm">
             &copy; {new Date().getFullYear()} MERAKI. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-secondary-foreground/70 hover:text-white text-sm transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-secondary-foreground/70 hover:text-white text-sm transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="text-secondary-foreground/70 hover:text-white text-sm transition-colors">
-              Shipping Info
-            </a>
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 mt-4 md:mt-0">
+            <div className="flex space-x-6">
+              <a href="#" className="text-secondary-foreground/70 hover:text-white text-sm transition-colors">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-secondary-foreground/70 hover:text-white text-sm transition-colors">
+                Terms of Service
+              </a>
+              <a href="#" className="text-secondary-foreground/70 hover:text-white text-sm transition-colors">
+                Shipping Info
+              </a>
+            </div>
+            <Link to="/admin/login">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:border-white/40 transition-all"
+              >
+                <Shield className="h-4 w-4 mr-2" />
+                Admin Login
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,0 +1,26 @@
+id,date,productdescription,suppliername,contactperson,mobileno,stdpacking,category,availability,imageupload,coa,msds,status,productstatus,lastupdate
+1,03/30/2023,Bluetooth Smart Speaker,Luxury Supplies Co.,M. Patel,9736853869,Drum,Luxury Goods,Out of Stock,luxury.png,Bluetooth_Smart_Speaker-COA.pdf,Bluetooth_Smart_Speaker-MSDS.pdf,1,1.0,09/12/2023
+2,04/15/2023,Italian Leather Wallet,Luxury Supplies Co.,R.Jaganathan,9350913653,25KG BAG,Luxury Goods,Out of Stock,luxury.png,Italian_Leather_Wallet-COA.pdf,Italian_Leather_Wallet-MSDS.pdf,1,1.0,04/18/2023
+3,04/07/2023,Oud Parfum Noir 100ml,Luxury Supplies Co.,R.Jaganathan,9674074748,1KG,Luxury Goods,In Stock,luxury.png,Oud_Parfum_Noir_100ml-COA.pdf,Oud_Parfum_Noir_100ml-MSDS.pdf,1,1.0,08/29/2023
+4,12/13/2023,Italian Leather Wallet,Luxury Supplies Co.,M. Patel,9304346650,1KG,Luxury Goods,In Stock,luxury.png,Italian_Leather_Wallet-COA.pdf,Italian_Leather_Wallet-MSDS.pdf,1,1.0,10/01/2023
+5,08/18/2023,Oud Parfum Noir 100ml,Luxury Supplies Co.,M. Patel,9299728927,Drum,Luxury Goods,Out of Stock,luxury.png,Oud_Parfum_Noir_100ml-COA.pdf,Oud_Parfum_Noir_100ml-MSDS.pdf,1,1.0,05/11/2023
+6,05/16/2023,Italian Leather Wallet,Luxury Supplies Co.,R.Jaganathan,9610063468,Drum,Luxury Goods,To Check,luxury.png,Italian_Leather_Wallet-COA.pdf,Italian_Leather_Wallet-MSDS.pdf,1,1.0,12/04/2023
+7,06/23/2023,Polarized Aviator Sunglasses,Luxury Supplies Co.,R.Jaganathan,9447749136,Box,Luxury Goods,Out of Stock,luxury.png,Polarized_Aviator_Sunglasses-COA.pdf,Polarized_Aviator_Sunglasses-MSDS.pdf,1,1.0,05/27/2023
+8,01/29/2023,Oud Parfum Noir 100ml,Luxury Supplies Co.,S. Singh,9252041390,Drum,Luxury Goods,In Stock,luxury.png,Oud_Parfum_Noir_100ml-COA.pdf,Oud_Parfum_Noir_100ml-MSDS.pdf,1,1.0,04/27/2023
+9,08/26/2023,Oud Parfum Noir 100ml,Luxury Supplies Co.,M. Patel,9952002723,25KG BAG,Luxury Goods,In Stock,luxury.png,Oud_Parfum_Noir_100ml-COA.pdf,Oud_Parfum_Noir_100ml-MSDS.pdf,1,1.0,04/18/2023
+10,09/11/2023,Polarized Aviator Sunglasses,Luxury Supplies Co.,R.Jaganathan,9046322759,Box,Luxury Goods,To Check,luxury.png,Polarized_Aviator_Sunglasses-COA.pdf,Polarized_Aviator_Sunglasses-MSDS.pdf,1,1.0,05/07/2023
+11,09/18/2023,Swiss Chronograph Watch,Luxury Supplies Co.,M. Patel,9894652367,Box,Luxury Goods,Out of Stock,luxury.png,Swiss_Chronograph_Watch-COA.pdf,Swiss_Chronograph_Watch-MSDS.pdf,1,1.0,04/03/2023
+12,03/05/2023,Polarized Aviator Sunglasses,Luxury Supplies Co.,S. Singh,9096498714,Box,Luxury Goods,Out of Stock,luxury.png,Polarized_Aviator_Sunglasses-COA.pdf,Polarized_Aviator_Sunglasses-MSDS.pdf,1,1.0,07/13/2023
+13,12/03/2023,Swiss Chronograph Watch,Luxury Supplies Co.,M. Patel,9507882682,Drum,Luxury Goods,In Stock,luxury.png,Swiss_Chronograph_Watch-COA.pdf,Swiss_Chronograph_Watch-MSDS.pdf,1,1.0,04/16/2023
+14,05/01/2023,Polarized Aviator Sunglasses,Luxury Supplies Co.,R.Jaganathan,9117972722,Box,Luxury Goods,Out of Stock,luxury.png,Polarized_Aviator_Sunglasses-COA.pdf,Polarized_Aviator_Sunglasses-MSDS.pdf,1,1.0,06/18/2023
+15,05/18/2023,Italian Leather Wallet,Luxury Supplies Co.,R.Jaganathan,9690486481,5KG,Luxury Goods,In Stock,luxury.png,Italian_Leather_Wallet-COA.pdf,Italian_Leather_Wallet-MSDS.pdf,1,1.0,02/28/2023
+16,01/20/2023,Italian Leather Wallet,Luxury Supplies Co.,M. Patel,9775173752,25KG BAG,Luxury Goods,In Stock,luxury.png,Italian_Leather_Wallet-COA.pdf,Italian_Leather_Wallet-MSDS.pdf,1,1.0,01/25/2023
+17,08/07/2023,Italian Leather Wallet,Luxury Supplies Co.,M. Patel,9303230511,1KG,Luxury Goods,Out of Stock,luxury.png,Italian_Leather_Wallet-COA.pdf,Italian_Leather_Wallet-MSDS.pdf,1,1.0,11/25/2023
+18,03/04/2023,Oud Parfum Noir 100ml,Luxury Supplies Co.,S. Singh,9766740206,Box,Luxury Goods,In Stock,luxury.png,Oud_Parfum_Noir_100ml-COA.pdf,Oud_Parfum_Noir_100ml-MSDS.pdf,1,1.0,11/29/2023
+19,07/07/2023,Bluetooth Smart Speaker,Luxury Supplies Co.,S. Singh,9378600484,5KG,Luxury Goods,In Stock,luxury.png,Bluetooth_Smart_Speaker-COA.pdf,Bluetooth_Smart_Speaker-MSDS.pdf,1,1.0,07/17/2023
+20,04/30/2023,Oud Parfum Noir 100ml,Luxury Supplies Co.,R.Jaganathan,9799407032,Box,Luxury Goods,In Stock,luxury.png,Oud_Parfum_Noir_100ml-COA.pdf,Oud_Parfum_Noir_100ml-MSDS.pdf,1,1.0,04/08/2023
+21,12/26/2023,Swiss Chronograph Watch,Luxury Supplies Co.,M. Patel,9509496781,Box,Luxury Goods,To Check,luxury.png,Swiss_Chronograph_Watch-COA.pdf,Swiss_Chronograph_Watch-MSDS.pdf,1,1.0,05/23/2023
+22,08/25/2023,Polarized Aviator Sunglasses,Luxury Supplies Co.,S. Singh,9139877392,Box,Luxury Goods,In Stock,luxury.png,Polarized_Aviator_Sunglasses-COA.pdf,Polarized_Aviator_Sunglasses-MSDS.pdf,1,1.0,07/04/2023
+23,04/07/2023,Oud Parfum Noir 100ml,Luxury Supplies Co.,M. Patel,9164464461,1KG,Luxury Goods,In Stock,luxury.png,Oud_Parfum_Noir_100ml-COA.pdf,Oud_Parfum_Noir_100ml-MSDS.pdf,1,1.0,05/31/2023
+24,10/26/2023,Swiss Chronograph Watch,Luxury Supplies Co.,S. Singh,9642473202,5KG,Luxury Goods,To Check,luxury.png,Swiss_Chronograph_Watch-COA.pdf,Swiss_Chronograph_Watch-MSDS.pdf,1,1.0,05/12/2023
+25,11/28/2023,Oud Parfum Noir 100ml,Luxury Supplies Co.,R.Jaganathan,9856984717,Box,Luxury Goods,To Check,luxury.png,Oud_Parfum_Noir_100ml-COA.pdf,Oud_Parfum_Noir_100ml-MSDS.pdf,1,1.0,01/26/2023
