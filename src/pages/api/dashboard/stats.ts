@@ -13,7 +13,7 @@ function authenticateToken(req: NextApiRequest): { userId: number; email: string
   }
 
   try {
-    return jwt.verify(token, JWT_SECRET);
+    return jwt.verify(token, JWT_SECRET) as { userId: number; email: string };
   } catch (err) {
     throw new Error('Invalid token');
   }

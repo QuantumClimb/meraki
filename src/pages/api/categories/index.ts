@@ -14,8 +14,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         ORDER BY c.name
       `).all();
 
-      res.json(categories.map(cat => ({
-        ...cat,
+      res.json(categories.map((cat: any) => ({
+        id: cat.id,
+        name: cat.name,
+        description: cat.description,
         _count: { products: cat.productCount }
       })));
     } catch (error) {

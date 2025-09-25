@@ -12,14 +12,27 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         FROM Product p 
         LEFT JOIN Category c ON p.categoryId = c.id 
         WHERE p.id = ?
-      `).get(Number(id));
+      `).get(Number(id)) as any;
 
       if (!product) {
         return res.status(404).json({ error: 'Product not found' });
       }
 
       res.json({
-        ...product,
+        id: product.id,
+        handle: product.handle,
+        title: product.title,
+        description: product.description,
+        image: product.image,
+        price: product.price,
+        subcategory: product.subcategory,
+        brand: product.brand,
+        condition: product.condition,
+        inventory: product.inventory,
+        seoTitle: product.seoTitle,
+        seoDescription: product.seoDescription,
+        createdAt: product.createdAt,
+        updatedAt: product.updatedAt,
         highlights: JSON.parse(product.highlights || '[]'),
         tags: JSON.parse(product.tags || '[]'),
         category: { name: product.categoryName }
@@ -63,10 +76,23 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         FROM Product p 
         LEFT JOIN Category c ON p.categoryId = c.id 
         WHERE p.id = ?
-      `).get(Number(id));
+      `).get(Number(id)) as any;
 
       res.json({
-        ...product,
+        id: product.id,
+        handle: product.handle,
+        title: product.title,
+        description: product.description,
+        image: product.image,
+        price: product.price,
+        subcategory: product.subcategory,
+        brand: product.brand,
+        condition: product.condition,
+        inventory: product.inventory,
+        seoTitle: product.seoTitle,
+        seoDescription: product.seoDescription,
+        createdAt: product.createdAt,
+        updatedAt: product.updatedAt,
         highlights: JSON.parse(product.highlights || '[]'),
         tags: JSON.parse(product.tags || '[]'),
         category: { name: product.categoryName }
