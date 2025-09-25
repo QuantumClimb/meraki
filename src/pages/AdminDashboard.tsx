@@ -208,7 +208,7 @@ const AdminDashboard = () => {
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          product.brand.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = !selectedCategory || product.category === selectedCategory;
+    const matchesCategory = !selectedCategory || product.category.name === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
