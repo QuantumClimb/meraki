@@ -41,7 +41,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       const total = db.prepare(countQuery).get(...params) as { total: number };
 
       // Parse JSON fields
-      const processedProducts = products.map((product: any) => ({
+      const processedProducts = products.map((product: { id: number; title: string; description: string; image: string; price: number; categoryId: number; subcategory?: string; highlights: string; tags: string; brand: string; condition: string; inventory: number; seoTitle?: string; seoDescription?: string; createdAt: string; updatedAt: string; categoryName?: string }) => ({
         ...product,
         highlights: JSON.parse(product.highlights || '[]'),
         tags: JSON.parse(product.tags || '[]'),
