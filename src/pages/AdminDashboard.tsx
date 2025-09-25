@@ -358,7 +358,7 @@ const AdminDashboard = () => {
                         <div>
                           <p className="font-medium">Order #{order.id}</p>
                           <p className="text-sm text-muted-foreground">
-                            {order.user?.email || 'Guest'}
+                            {order.userEmail || 'Guest'}
                           </p>
                         </div>
                         <div className="text-right">
