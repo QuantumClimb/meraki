@@ -99,7 +99,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                 Nutritional Information
               </AccordionTrigger>
               <AccordionContent>
-                <p className="whitespace-pre-line">{product.nutritional_info}</p>
+                <p className="whitespace-pre-line">{product.description}</p>
               </AccordionContent>
             </AccordionItem>
             
