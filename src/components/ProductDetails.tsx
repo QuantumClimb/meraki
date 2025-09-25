@@ -108,7 +108,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                 Ingredients
               </AccordionTrigger>
               <AccordionContent>
-                <p>{product.ingredients}</p>
+                <p>{product.description}</p>
               </AccordionContent>
             </AccordionItem>
             
@@ -117,7 +117,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                 Preparation & Uses
               </AccordionTrigger>
               <AccordionContent>
-                <p>{product.preparation}</p>
+                <p>{product.description}</p>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
