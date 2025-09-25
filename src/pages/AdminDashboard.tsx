@@ -34,12 +34,21 @@ interface DashboardStats {
 interface Product {
   id: number;
   title: string;
+  description: string;
+  image: string;
   price: number;
-  inventory: number;
-  category: { name: string };
+  categoryId: number;
+  subcategory: string;
+  highlights: string[];
+  tags: string[];
   brand: string;
   condition: string;
+  inventory: number;
+  seoTitle: string;
+  seoDescription: string;
   createdAt: string;
+  updatedAt: string;
+  category: { name: string };
 }
 
 interface Category {
@@ -208,7 +217,7 @@ const AdminDashboard = () => {
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          product.brand.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = !selectedCategory || product.category.name === selectedCategory;
+    const matchesCategory = !selectedCategory || product.categoryId.toString() === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
