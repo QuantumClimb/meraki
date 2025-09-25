@@ -114,10 +114,9 @@ function initializeTables(db: Database.Database) {
   // Insert default admin if it doesn't exist
   const adminCount = db.prepare('SELECT COUNT(*) as count FROM Admin').get() as { count: number };
   if (adminCount.count === 0) {
-    const bcrypt = require('bcryptjs');
-    const hashedPassword = bcrypt.hashSync('admin123', 10);
-    const insertAdmin = db.prepare('INSERT INTO Admin (email, password, name) VALUES (?, ?, ?)');
-    insertAdmin.run('admin@meraki.com', hashedPassword, 'Admin User');
+    // Note: bcryptjs is not available in Edge Runtime, admin will need to be created manually
+    // For now, we'll skip admin creation in production
+    console.log('Admin user needs to be created manually in production');
   }
 }
 

@@ -28,7 +28,7 @@ interface DashboardStats {
   totalOrders: number;
   totalUsers: number;
   totalCategories: number;
-  recentOrders: any[];
+  recentOrders: { id: number; total: number; status: string; createdAt: string; userEmail?: string }[];
 }
 
 interface Product {
@@ -354,7 +354,7 @@ const AdminDashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {stats?.recentOrders?.slice(0, 5).map((order: any) => (
+                    {stats?.recentOrders?.slice(0, 5).map((order: { id: number; total: number; status: string; createdAt: string; userEmail?: string }) => (
                       <div key={order.id} className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">Order #{order.id}</p>

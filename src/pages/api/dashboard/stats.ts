@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-function authenticateToken(req: NextApiRequest): any {
+function authenticateToken(req: NextApiRequest): { userId: number; email: string } {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 

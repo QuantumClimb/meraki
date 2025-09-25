@@ -10,7 +10,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       const skip = (Number(page) - 1) * Number(limit);
       
       let whereClause = '';
-      const params: any[] = [];
+      const params: (string | number)[] = [];
       
       if (category) {
         whereClause += ' WHERE p.categoryId = ?';
@@ -60,7 +60,21 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   } else if (req.method === 'POST') {
     // Create new product
     try {
-      const { title, description, image, price, categoryId, subcategory, highlights, tags, brand, condition, inventory, seoTitle, seoDescription } = req.body;
+      const { title, description, image, price, categoryId, subcategory, highlights, tags, brand, condition, inventory, seoTitle, seoDescription } = req.body as {
+        title: string;
+        description: string;
+        image: string;
+        price: number;
+        categoryId: number;
+        subcategory?: string;
+        highlights?: string;
+        tags?: string;
+        brand: string;
+        condition: string;
+        inventory: number;
+        seoTitle?: string;
+        seoDescription?: string;
+      };
       
       const insertProduct = db.prepare(`
         INSERT INTO Product (handle, title, description, image, price, categoryId, subcategory, highlights, tags, brand, condition, inventory, seoTitle, seoDescription)
