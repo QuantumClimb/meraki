@@ -3,8 +3,5 @@
   "framework": "nextjs",
   "buildCommand": "next build",
   "devCommand": "next dev",
-  "installCommand": "npm install",
-  "env": {
-    "JWT_SECRET": "@jwt-secret"
-  }
+  "installCommand": "npm install"
 }
